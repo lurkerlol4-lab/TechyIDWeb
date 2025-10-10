@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Welcome — Techy-ID Co.</title>
+
+  <!-- Fonts & Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+    
+    <!-- Logo -->
+    <div style="margin-bottom:30px;">
+      <div style="font-family:'Orbitron';font-size:40px;font-weight:700;color:var(--cyan);text-shadow:0 0 15px rgba(95,216,255,0.4);">
+        TECHY-ID CO.
+      </div>
+      <p style="color:var(--muted);font-size:16px;">Fast. Secure. Verified.</p>
+    </div>
+
+    <!-- Animated Panel -->
+    <div class="card" style="max-width:500px;">
+      <h2>Welcome</h2>
+      <p>Choose where to go:</p>
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:20px;">
+        <a href="Website.html" class="btn btn-primary">🌐 Enter Main Website</a>
+        <a href="App.html" class="btn btn-ghost">📷 Open Multi Name Scanner</a>
+      </div>
+    </div>
+
+    <footer style="margin-top:40px;">© 2025 Techy-ID Co. — Fast. Secure. Verified.</footer>
+  </div>
+
+  <script>
+    // Simple fade-in animation
+    document.body.style.opacity="0";
+    window.addEventListener("load",()=>{
+      document.body.style.transition="opacity 1.5s ease";
+      document.body.style.opacity="1";
+    });
+  </script>
+</body>
+</html>
