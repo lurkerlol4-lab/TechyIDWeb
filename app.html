@@ -5,77 +5,235 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Techy-ID Co. — Multi Name Scanner</title>
 
-  <!-- Fonts & Styles -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --cyan: #5fd8ff;
+      --cyan-2: #c3f0ff;
+      --blue-light: #e9faff;
+      --blue-mid: #b9ecff;
+      --muted: #4a4a4a;
+      --text-dark: #001217;
+      --accent-glow: 0 0 20px rgba(95,216,255,0.6);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* --- Animated Cubism Background --- */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: linear-gradient(135deg, var(--blue-light), var(--white) 40%, var(--blue-mid));
+      clip-path: polygon(0% 0%, 25% 5%, 50% 0%, 75% 8%, 100% 0%, 100% 100%, 75% 95%, 50% 100%, 25% 92%, 0% 100%);
+      animation: wave1 12s ease-in-out infinite alternate;
+      opacity: 0.7;
+    }
+
+    body::after {
+      z-index: -1;
+      background: linear-gradient(135deg, var(--cyan-2), var(--white), var(--cyan));
+      clip-path: polygon(0% 10%, 25% 0%, 50% 8%, 75% 0%, 100% 12%, 100% 100%, 75% 92%, 50% 100%, 25% 95%, 0% 100%);
+      animation: wave2 15s ease-in-out infinite alternate;
+      opacity: 0.6;
+      mix-blend-mode: lighten;
+    }
+
+    @keyframes wave1 {
+      0% { clip-path: polygon(0% 0%, 25% 5%, 50% 0%, 75% 8%, 100% 0%, 100% 100%, 75% 95%, 50% 100%, 25% 92%, 0% 100%); }
+      100% { clip-path: polygon(0% 3%, 25% 0%, 50% 5%, 75% 2%, 100% 4%, 100% 100%, 75% 96%, 50% 98%, 25% 99%, 0% 97%); }
+    }
+
+    @keyframes wave2 {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-20px) scale(1.05); }
+    }
+
+    /* --- Container --- */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      font-family: 'Orbitron';
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.85);
+      border-radius: 18px;
+      padding: 26px;
+      margin: 26px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--cyan), var(--cyan-2));
+      color: #001217;
+      box-shadow: var(--accent-glow);
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .preview, video {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 10px;
+      box-shadow: 0 0 10px rgba(95,216,255,0.3);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background: var(--cyan-2);
+    }
+
+    .check {
+      color: green;
+      font-weight: 700;
+    }
+
+    .xmark {
+      color: red;
+      font-weight: 700;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      resize: none;
+      font-family: 'Inter';
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 24px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <section class="card">
       <h2>📷 Scan Names</h2>
-      <p>Upload a picture containing multiple names (one per line).</p>
-      <input type="file" id="image-input" accept="image/*" onchange="previewImage(event)">
-      <img id="preview" class="preview" style="display:none;">
-      <button class="btn btn-primary" onclick="scanImage()">Scan Now</button>
+      <p>Use your phone camera to capture multiple names (one per line). The app will detect and check them against your master list.</p>
+      <video id="camera" autoplay playsinline></video>
+      <canvas id="snapshot" style="display:none;"></canvas>
+      <button class="btn" onclick="captureAndScan()">📸 Capture & Scan</button>
       <div id="scan-result" class="result"></div>
     </section>
 
     <section class="card">
       <h2>📝 Name List</h2>
       <p>Enter valid names (one per line):</p>
-      <textarea id="name-list" class="input" rows="6" placeholder="Type or paste names here..."></textarea>
+      <textarea id="name-list" rows="6" placeholder="Type or paste names here..."></textarea>
     </section>
+
+    <footer>© 2025 Techy-ID Co. — Fast. Secure. Verified.</footer>
   </div>
 
   <!-- OCR Library -->
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <script>
-    let selectedImage=null;
-    function previewImage(event){
-      const file=event.target.files[0];
-      if(file){
-        const reader=new FileReader();
-        reader.onload=function(e){
-          const img=document.getElementById("preview");
-          img.src=e.target.result;
-          img.style.display="block";
-          selectedImage=e.target.result;
-        }
-        reader.readAsDataURL(file);
+    const video = document.getElementById('camera');
+    const canvas = document.getElementById('snapshot');
+    const scanResult = document.getElementById('scan-result');
+
+    // Access phone camera
+    async function startCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        video.srcObject = stream;
+      } catch (err) {
+        scanResult.textContent = "Camera access denied or not supported.";
       }
     }
+    startCamera();
 
-    async function scanImage(){
-      const scanResult=document.getElementById("scan-result");
-      if(!selectedImage){
-        scanResult.textContent="Please upload an image first.";
-        return;
-      }
-      scanResult.textContent="Scanning...";
-      const {data:{text}}=await Tesseract.recognize(selectedImage,'eng');
-      const scannedNames=text.split("\n").map(n=>n.trim()).filter(n=>n);
+    async function captureAndScan() {
+      const context = canvas.getContext('2d');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const imageData = canvas.toDataURL('image/png');
+
+      scanResult.textContent = "Scanning... please wait.";
+      const { data: { text } } = await Tesseract.recognize(imageData, 'eng');
+      const scannedNames = text.split("\n").map(n => n.trim()).filter(n => n);
       checkNames(scannedNames);
     }
 
-    function checkNames(scannedNames){
-      const scanResult=document.getElementById("scan-result");
-      const listText=document.getElementById("name-list").value;
-      const validNames=listText.split("\n").map(n=>n.trim().toLowerCase()).filter(n=>n);
-      if(scannedNames.length===0){
-        scanResult.textContent="No names detected.";
+    function checkNames(scannedNames) {
+      const listText = document.getElementById("name-list").value;
+      const validNames = listText.split("\n").map(n => n.trim().toLowerCase()).filter(n => n);
+      if (scannedNames.length === 0) {
+        scanResult.textContent = "No names detected.";
         return;
       }
-      let html=`<table><tr><th>Scanned Name</th><th>Status</th></tr>`;
-      scannedNames.forEach(name=>{
-        const clean=name.toLowerCase();
-        if(validNames.includes(clean)){
-          html+=`<tr><td>${name}</td><td class="check">✔ Found</td></tr>`;
+      let html = `<table><tr><th>Scanned Name</th><th>Status</th></tr>`;
+      scannedNames.forEach(name => {
+        const clean = name.toLowerCase();
+        if (validNames.includes(clean)) {
+          html += `<tr><td>${name}</td><td class="check">✔ Found</td></tr>`;
         } else {
-          html+=`<tr><td>${name}</td><td class="xmark">✘ Not Found</td></tr>`;
+          html += `<tr><td>${name}</td><td class="xmark">✘ Not Found</td></tr>`;
         }
       });
-      html+="</table>";
-      scanResult.innerHTML=html;
+      html += "</table>";
+      scanResult.innerHTML = html;
     }
   </script>
 </body>
