@@ -5,17 +5,201 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Techy-ID Co. — Fast. Secure. Verified.</title>
 
-  <!-- Fonts & Styles -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --cyan: #5fd8ff;
+      --cyan-2: #c3f0ff;
+      --blue-light: #e9faff;
+      --blue-mid: #b9ecff;
+      --muted: #4a4a4a;
+      --text-dark: #001217;
+      --accent-glow: 0 0 20px rgba(95,216,255,0.6);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* --- ANIMATED CUBISM BACKGROUND --- */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: linear-gradient(135deg, var(--blue-light), var(--white) 40%, var(--blue-mid));
+      clip-path: polygon(
+        0% 0%, 25% 5%, 50% 0%, 75% 8%, 100% 0%,
+        100% 100%, 75% 95%, 50% 100%, 25% 92%, 0% 100%
+      );
+      animation: wave1 12s ease-in-out infinite alternate;
+      opacity: 0.7;
+    }
+
+    body::after {
+      z-index: -1;
+      background: linear-gradient(135deg, var(--cyan-2), var(--white), var(--cyan));
+      clip-path: polygon(
+        0% 10%, 25% 0%, 50% 8%, 75% 0%, 100% 12%,
+        100% 100%, 75% 92%, 50% 100%, 25% 95%, 0% 100%
+      );
+      animation: wave2 15s ease-in-out infinite alternate;
+      opacity: 0.6;
+      mix-blend-mode: lighten;
+    }
+
+    @keyframes wave1 {
+      0% { clip-path: polygon(0% 0%, 25% 5%, 50% 0%, 75% 8%, 100% 0%, 100% 100%, 75% 95%, 50% 100%, 25% 92%, 0% 100%); }
+      100% { clip-path: polygon(0% 3%, 25% 0%, 50% 5%, 75% 2%, 100% 4%, 100% 100%, 75% 96%, 50% 98%, 25% 99%, 0% 97%); }
+    }
+
+    @keyframes wave2 {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-20px) scale(1.05); }
+    }
+
+    /* --- INTRO --- */
+    .intro {
+      background: linear-gradient(180deg, #ffffff, #f3fbff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 9999;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    .intro-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Orbitron';
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--text-dark);
+    }
+
+    .intro-mark {
+      width: 90px;
+      height: 50px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--cyan), var(--cyan-2));
+      color: #001217;
+      font-weight: 700;
+      font-size: 20px;
+      box-shadow: var(--accent-glow);
+    }
+
+    /* --- CONTAINER --- */
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* --- HEADER --- */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    header a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    header a:hover {
+      color: var(--cyan);
+    }
+
+    /* --- BUTTONS --- */
+    .btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--cyan-2));
+      color: #001217;
+      box-shadow: var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid transparent;
+    }
+
+    /* --- CARD --- */
+    .card {
+      background: rgba(255,255,255,0.85);
+      border-radius: 18px;
+      padding: 26px;
+      margin: 26px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      font-family: 'Orbitron';
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: 'Inter';
+      resize: none;
+    }
+  </style>
 </head>
 <body>
   <!-- Intro -->
-  <div class="intro" id="intro" style="position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg,#000,#020203);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;transition:opacity 1s ease, visibility 1s ease;">
-    <div class="intro-logo" style="display:flex;align-items:center;gap:12px;font-family:'Orbitron';font-weight:700;font-size:28px;color:var(--cyan);">
-      <div class="intro-mark" style="width:90px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cyan),var(--cyan-2));color:#001217;font-weight:700;font-size:20px;box-shadow:0 0 20px rgba(95,216,255,0.4);">
-        ID
-      </div>
+  <div class="intro" id="intro">
+    <div class="intro-logo">
+      <div class="intro-mark">ID</div>
       TECHY-ID CO.
     </div>
     <div style="margin-top:12px;color:var(--muted)">Fast. Secure. Verified.</div>
@@ -23,17 +207,15 @@
 
   <div class="container">
     <!-- Header -->
-    <header style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
-      <div class="brand" style="display:flex;gap:14px;align-items:center;">
-        <div class="logo" style="display:flex;align-items:center;gap:10px;">
-          <div class="logo-mark" style="width:84px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cyan),var(--cyan-2));box-shadow:var(--accent-glow);font-family:'Orbitron';font-weight:700;color:#001217;font-size:20px;">ID</div>
-          <div class="logo-text" style="font-family:'Orbitron';font-weight:700;font-size:18px;color:var(--white);">TECHY-ID CO.</div>
-        </div>
+    <header>
+      <div class="logo" style="display:flex;align-items:center;gap:10px;">
+        <div class="logo-mark" style="width:84px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cyan),var(--cyan-2));box-shadow:var(--accent-glow);font-family:'Orbitron';font-weight:700;color:#001217;font-size:20px;">ID</div>
+        <div class="logo-text" style="font-family:'Orbitron';font-weight:700;font-size:18px;color:#001217;">TECHY-ID CO.</div>
       </div>
       <nav style="display:flex;gap:18px;align-items:center;">
         <a class="btn btn-ghost" href="#about">About</a>
         <a class="btn btn-ghost" href="#product">Product</a>
-        <a class="btn btn-ghost" href="#team">Team</a>
+        <a class="btn btn-ghost" href="#about-us">About Us</a>
         <a class="btn btn-primary" href="#contact">Contact</a>
       </nav>
     </header>
@@ -41,26 +223,32 @@
     <!-- Hero -->
     <section id="hero" class="card">
       <h2>Welcome to Techy-ID Co.</h2>
-      <p>We revolutionize identity verification with cutting-edge digital solutions. Our flagship mobile app, <strong>IDReaderXP</strong>, ensures fast, secure, and reliable authentication for individuals, businesses, and institutions.</p>
+      <p>We revolutionize identity verification with digital solutions. Our flagship mobile app, <strong>IDReaderXP</strong>, ensures fast, secure, and reliable authentication for individuals, businesses, and institutions.</p>
     </section>
 
     <!-- Product -->
     <section id="product" class="card">
       <h2>Our Product</h2>
-      <p><strong>IDReaderXP</strong> is a secure mobile application designed for scanning, verifying, and managing digital IDs providing businesses and users with a trustworthy verification system.</p>
+      <p><strong>IDReaderXP</strong> is a secure mobile application designed for scanning, verifying, and managing digital IDs — providing businesses and users with a trustworthy verification system.</p>
       <a href="app.html" class="btn btn-ghost">🔗 Try the Multi Name Scanner</a>
     </section>
 
-    <!-- About -->
+    <!-- About Company -->
     <section id="about" class="card">
       <h2>Company Description</h2>
-      <p>Founded in the Philippines, Techy-ID Co. is a forward-thinking tech company committed to building trust in the digital age. By integrating advanced security and user-friendly tools, we enable seamless identity verification anytime, anywhere.</p>
+      <p>Founded in the Philippines, Techy-ID Co. is a forward-thinking technology company dedicated to redefining identity verification in the digital age. By combining scanning technology with simple user interfaces, we provide solutions that allow schools, organizations, and enterprises to verify individuals securely, quickly, and reliably.</p>
     </section>
 
-    <!-- Team -->
-    <section id="team" class="card">
-      <h2>Leadership</h2>
-      <p>Our company thrives under strong leadership:</p>
+    <!-- About Us -->
+    <section id="about-us" class="card">
+      <h2>About Us</h2>
+      <p>Techy-ID Co. is more than a technology startup — it’s a mission to build trust and efficiency in digital verification systems. Our team is composed of innovative thinkers and engineers driven by the goal of making ID validation more secure and accessible for everyone.</p>
+      <p>At Techy-ID, we prioritize data security, user privacy, and simplicity. Our core product, <strong>IDReaderXP</strong>, serves as a modern solution that empowers institutions to authenticate individuals without requiring QR codes or manual checking — ensuring convenience without compromising security.</p>
+      <p>We continue to innovate through our research in AI-based scanning and real-time ID validation, aiming to become a leader in identity technology solutions across Asia. Techy-ID is proudly built in the Philippines, inspired by local ingenuity and global standards.</p>
+      <p><strong>Mission:</strong> To provide a secure, fast, and accessible platform for digital identity verification that benefits communities, schools, and businesses.</p>
+      <p><strong>Vision:</strong> To become the most trusted and advanced digital ID verification company in Southeast Asia by 2030.</p>
+      <br>
+      <h3>Leadership Team</h3>
       <ul>
         <li><strong>CEO:</strong> Kristine Lopez</li>
         <li><strong>CO-CEO:</strong> Cristopher Esorenia</li>
@@ -72,33 +260,21 @@
     <!-- Contact -->
     <section id="contact" class="card">
       <h2>Contact Us</h2>
-      <p>Reach out to learn more about Techy-ID solutions or partnership opportunities.</p>
-      <form onsubmit="event.preventDefault();contactSubmit();">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn btn-primary">Send</button>
-      </form>
-      <p id="contact-msg" style="margin-top:10px;color:var(--cyan)"></p>
+      <p>Have questions, suggestions, or partnership proposals? We’d love to hear from you! You can reach our team directly through email.</p>
+      <p><strong>Email us at:</strong> <a href="mailto:techyidcompany@gmail.com" style="color:var(--cyan);text-decoration:none;font-weight:600;">techyidcompany@gmail.com</a></p>
+      <p style="margin-top:8px;">Please include your name, organization (if applicable), and message. We’ll respond as soon as possible.</p>
     </section>
 
     <footer>© 2025 Techy-ID Co. — Fast. Secure. Verified.</footer>
   </div>
 
   <script>
-    // Intro fade out
     window.addEventListener("load",()=>{
       setTimeout(()=>{
         document.getElementById("intro").style.opacity="0";
         document.getElementById("intro").style.visibility="hidden";
       },2500);
     });
-
-    function contactSubmit(){
-      const msg=document.getElementById('contact-msg');
-      msg.textContent="Thanks — your message was captured (demo). We'll contact you soon.";
-      setTimeout(()=>msg.textContent='',4000);
-    }
   </script>
 </body>
 </html>
