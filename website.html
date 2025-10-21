@@ -18,181 +18,152 @@
       --muted: #4a4a4a;
       --text-dark: #001217;
       --accent-glow: 0 0 20px rgba(95,216,255,0.6);
+      --modal-bg: rgba(0,0,0,0.6);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       background: var(--white);
       color: var(--text-dark);
-      overflow-x: hidden;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* --- ANIMATED BACKGROUND --- */
-    body::before,
-    body::after {
+    /* Animated cubism background */
+    body::before, body::after {
       content: "";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       z-index: -2;
+      pointer-events: none;
+    }
+    body::before {
       background: linear-gradient(135deg, var(--blue-light), var(--white) 40%, var(--blue-mid));
       clip-path: polygon(0% 0%, 25% 5%, 50% 0%, 75% 8%, 100% 0%, 100% 100%, 75% 95%, 50% 100%, 25% 92%, 0% 100%);
-      animation: wave1 12s ease-in-out infinite alternate;
       opacity: 0.7;
+      animation: waveA 12s ease-in-out infinite alternate;
     }
-
     body::after {
-      z-index: -1;
       background: linear-gradient(135deg, var(--cyan-2), var(--white), var(--cyan));
       clip-path: polygon(0% 10%, 25% 0%, 50% 8%, 75% 0%, 100% 12%, 100% 100%, 75% 92%, 50% 100%, 25% 95%, 0% 100%);
-      animation: wave2 15s ease-in-out infinite alternate;
       opacity: 0.6;
       mix-blend-mode: lighten;
+      animation: waveB 15s ease-in-out infinite alternate;
     }
+    @keyframes waveA { 0%{transform:translateY(0)}100%{transform:translateY(-18px)} }
+    @keyframes waveB { 0%{transform:translateY(0) scale(1)}100%{transform:translateY(-20px) scale(1.03)} }
 
-    @keyframes wave1 {
-      0% { clip-path: polygon(0% 0%, 25% 5%, 50% 0%, 75% 8%, 100% 0%, 100% 100%, 75% 95%, 50% 100%, 25% 92%, 0% 100%); }
-      100% { clip-path: polygon(0% 3%, 25% 0%, 50% 5%, 75% 2%, 100% 4%, 100% 100%, 75% 96%, 50% 98%, 25% 99%, 0% 97%); }
-    }
+    /* Layout */
+    .container { max-width: 950px; margin: 0 auto; padding: 24px; position: relative; z-index: 1; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; gap: 12px; }
+    nav { display:flex; gap:18px; align-items:center; }
+    nav a { text-decoration:none; color:var(--text-dark); font-weight:600; padding:6px 8px; border-radius:8px; }
+    nav a:hover { color:var(--cyan); background: rgba(0,186,255,0.03); }
 
-    @keyframes wave2 {
-      0% { transform: translateY(0px) scale(1); }
-      100% { transform: translateY(-20px) scale(1.05); }
-    }
-
-    /* --- INTRO --- */
-    .intro {
-      background: linear-gradient(180deg, #ffffff, #f3fbff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 9999;
-      transition: opacity 1s ease, visibility 1s ease;
-    }
-
-    .intro-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: 'Orbitron';
-      font-weight: 700;
-      font-size: 28px;
-      color: var(--text-dark);
-    }
-
-    .intro-mark {
-      width: 90px;
-      height: 50px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--cyan), var(--cyan-2));
-      color: #001217;
-      font-weight: 700;
-      font-size: 20px;
+    .logo-mark { width:84px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg,var(--cyan),var(--cyan-2)); color:#001217; font-family:'Orbitron'; font-weight:700;
       box-shadow: var(--accent-glow);
     }
 
-    /* --- CONTAINER --- */
-    .container {
-      max-width: 950px;
-      margin: 0 auto;
-      padding: 24px;
-      position: relative;
-      z-index: 1;
-    }
+    .card { background: rgba(255,255,255,0.9); border-radius: 18px; padding: 26px; margin: 26px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); backdrop-filter: blur(10px); }
+    h2 { font-family:'Orbitron'; color:var(--text-dark); margin-bottom:10px; }
+    p { color:var(--muted); line-height:1.5; }
 
-    /* --- HEADER --- */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 0;
-    }
+    .btn { padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:600; border:none; }
+    .btn-primary { background: linear-gradient(135deg,var(--cyan),var(--cyan-2)); color:#001217; box-shadow: var(--accent-glow); }
+    .btn-ghost { background: transparent; color: var(--muted); border-radius:8px; padding:8px 12px; }
 
-    header a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    header a:hover {
-      color: var(--cyan);
-    }
-
-    /* --- PULSE LOGO --- */
+    /* Strong pulse circle logo in header */
     .pulse-logo {
-      width: 70px;
-      height: 70px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       overflow: hidden;
-      box-shadow: 0 0 25px rgba(95, 216, 255, 0.9);
-      animation: pulseGlow 2s infinite ease-in-out;
+      display: inline-block;
       border: 3px solid var(--cyan);
+      box-shadow: 0 0 30px rgba(95,216,255,0.9);
+      animation: strongPulse 2.5s ease-in-out infinite;
+      background-size: cover;
+      background-position: center;
+    }
+    .pulse-logo img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    @keyframes strongPulse {
+      0% { transform: scale(1); box-shadow: 0 0 20px rgba(95,216,255,0.6), 0 0 40px rgba(95,216,255,0.4); }
+      50% { transform: scale(1.06); box-shadow: 0 0 50px rgba(95,216,255,1), 0 0 90px rgba(95,216,255,0.7); }
+      100% { transform: scale(1); box-shadow: 0 0 20px rgba(95,216,255,0.6), 0 0 40px rgba(95,216,255,0.4); }
     }
 
-    @keyframes pulseGlow {
-      0% { box-shadow: 0 0 10px rgba(95, 216, 255, 0.7), 0 0 20px rgba(95, 216, 255, 0.6); transform: scale(1); }
-      50% { box-shadow: 0 0 30px rgba(95, 216, 255, 1), 0 0 60px rgba(95, 216, 255, 0.8); transform: scale(1.05); }
-      100% { box-shadow: 0 0 10px rgba(95, 216, 255, 0.7), 0 0 20px rgba(95, 216, 255, 0.6); transform: scale(1); }
+    /* Paywall overlay (dark + blur) */
+    #paywallOverlay {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 3000;
+      background: var(--modal-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.35s ease;
     }
+    #paywallOverlay.visible { display:flex; opacity:1; }
 
-    /* --- BUTTONS --- */
-    .btn {
-      padding: 8px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      border: none;
-      transition: 0.3s;
-      font-weight: 600;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--cyan), var(--cyan-2));
-      color: #001217;
-      box-shadow: var(--accent-glow);
-    }
-
-    .btn-primary:hover { filter: brightness(1.1); }
-    .btn-ghost { background: transparent; border: 2px solid transparent; }
-
-    /* --- CARD --- */
-    .card {
-      background: rgba(255,255,255,0.85);
-      border-radius: 18px;
-      padding: 26px;
-      margin: 26px 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      backdrop-filter: blur(10px);
-    }
-
-    h2 { font-family: 'Orbitron'; color: var(--text-dark); margin-bottom: 10px; }
-
-    footer {
+    /* Paywall card */
+    .paywall-card {
+      width: 92%;
+      max-width: 480px;
+      border-radius: 16px;
+      padding: 20px 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,255,255,0.9));
+      box-shadow: 0 10px 40px rgba(0,0,0,0.35), 0 0 60px rgba(95,216,255,0.12);
       text-align: center;
-      margin-top: 20px;
-      color: var(--muted);
-      font-size: 14px;
+      transform: translateY(10px);
+      transition: transform 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.45s;
+      font-family: Inter, sans-serif;
+    }
+    .paywall-card.show { transform: translateY(0); opacity:1; }
+
+    .paywall-title { font-family: 'Orbitron'; font-size:20px; color:var(--text-dark); margin-bottom:8px; }
+    .paywall-sub { color:var(--muted); margin-bottom:18px; }
+
+    .pay-methods { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:12px; }
+    .pay-btn {
+      padding:12px 18px; border-radius:12px; cursor:pointer; border:2px solid rgba(0,0,0,0.06);
+      min-width:120px; font-weight:700; background:linear-gradient(90deg,var(--cyan-2),var(--cyan));
+      color:#001217; box-shadow: 0 6px 22px rgba(95,216,255,0.14);
+      position:relative; overflow:hidden;
     }
 
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-family: 'Inter';
-      resize: none;
+    .pay-btn:hover { transform: translateY(-4px); box-shadow: 0 8px 34px rgba(95,216,255,0.25); }
+    .pay-btn:active { transform: translateY(-2px); }
+
+    /* shimmer animation on buttons */
+    .pay-btn::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -40%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.06), rgba(255,255,255,0.25), rgba(255,255,255,0.06));
+      transform: rotate(25deg);
+      transition: transform 0.9s ease;
+      opacity: 0.0;
+    }
+    .pay-btn:hover::after { transform: translateX(260%) rotate(25deg); opacity: 1; }
+
+    .pay-cancel { margin-top:10px; background:transparent; color:var(--muted); border-radius:10px; padding:8px 12px; border:none; cursor:pointer; }
+
+    /* fade-out class for overlay when redirecting (slow 2s) */
+    #paywallOverlay.fadingOut { opacity: 0; transition: opacity 2s ease; }
+
+    @media (max-width:640px) {
+      .pay-btn { min-width:100px; padding:10px 12px; }
+      .pulse-logo { width:62px; height:62px; }
     }
   </style>
 </head>
@@ -207,13 +178,16 @@
   </div>
 
   <div class="container">
-    <!-- Header -->
+    <!-- Header with pulse logo -->
     <header>
-      <div class="logo" style="display:flex;align-items:center;gap:14px;">
-        <img src="company.jpeg" alt="TechyID Logo" class="pulse-logo">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div class="pulse-logo" aria-hidden="true">
+          <img src="company.jpeg" alt="Techy-ID Logo">
+        </div>
         <div class="logo-text" style="font-family:'Orbitron';font-weight:700;font-size:20px;color:#001217;">TECHY-ID CO.</div>
       </div>
-      <nav style="display:flex;gap:18px;align-items:center;">
+
+      <nav>
         <a class="btn btn-ghost" href="#about">About</a>
         <a class="btn btn-ghost" href="#product">Product</a>
         <a class="btn btn-ghost" href="#about-us">About Us</a>
@@ -231,10 +205,15 @@
     <section id="product" class="card">
       <h2>Our Product</h2>
       <p><strong>IDReaderXP</strong> is a secure mobile application designed for scanning, verifying, and managing digital IDs — providing businesses and users with a trustworthy verification system.</p>
-      <a href="app.html" class="btn btn-ghost">🔗 Try the Multi Name Scanner</a>
+
+      <!-- Purchase trigger -->
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="purchaseBtn">Purchase and Open IDReaderXP</button>
+        <span style="color:var(--muted);">— ₱50 / week (mock subscription)</span>
+      </div>
     </section>
 
-    <!-- About Company -->
+    <!-- Company Description -->
     <section id="about" class="card">
       <h2>Company Description</h2>
       <p>Founded in the Philippines, Techy-ID Co. is a forward-thinking technology company dedicated to redefining identity verification in the digital age. By combining scanning technology with simple user interfaces, we provide solutions that allow schools, organizations, and enterprises to verify individuals securely, quickly, and reliably.</p>
@@ -269,12 +248,80 @@
     <footer>© 2025 Techy-ID Co. — Fast. Secure. Verified.</footer>
   </div>
 
+  <!-- Paywall overlay (dark blur + frosted card) -->
+  <div id="paywallOverlay" role="dialog" aria-hidden="true" aria-labelledby="payTitle" aria-modal="true">
+    <div class="paywall-card" id="paywallCard" role="document">
+      <div class="paywall-title" id="payTitle">Purchase and Open IDReaderXP</div>
+      <div class="paywall-sub">To continue, please select your preferred payment method.</div>
+
+      <div class="pay-methods" role="list">
+        <button class="pay-btn" data-method="GCash" onclick="choosePayment('GCash')">📱 GCash</button>
+        <button class="pay-btn" data-method="Card" onclick="choosePayment('Card')">💳 Credit / Debit Card</button>
+        <button class="pay-btn" data-method="PayPal" onclick="choosePayment('PayPal')">💸 PayPal</button>
+      </div>
+
+      <button class="pay-cancel" onclick="closePaywall()">Cancel</button>
+    </div>
+  </div>
+
   <script>
-    window.addEventListener("load",()=>{
-      setTimeout(()=>{
-        document.getElementById("intro").style.opacity="0";
-        document.getElementById("intro").style.visibility="hidden";
-      },2500);
+    // intro fade
+    window.addEventListener("load", () => {
+      const intro = document.getElementById('intro');
+      if (intro) {
+        setTimeout(()=> {
+          intro.style.opacity = '0';
+          intro.style.visibility = 'hidden';
+        }, 2000);
+      }
+    });
+
+    // Paywall controls
+    const purchaseBtn = document.getElementById('purchaseBtn');
+    const paywallOverlay = document.getElementById('paywallOverlay');
+    const paywallCard = document.getElementById('paywallCard');
+
+    purchaseBtn.addEventListener('click', openPaywall);
+
+    function openPaywall() {
+      // show overlay
+      paywallOverlay.classList.add('visible');
+      paywallOverlay.setAttribute('aria-hidden', 'false');
+      // small entrance
+      setTimeout(()=> paywallCard.classList.add('show'), 30);
+      // trap focus for accessibility (simple)
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePaywall() {
+      // hide with smooth slide-out then fully hide
+      paywallCard.classList.remove('show');
+      paywallOverlay.classList.remove('visible');
+      paywallOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function choosePayment(method) {
+      // Optionally show quick feedback (could be expanded)
+      // Fade out overlay slowly (2s) then redirect
+      paywallCard.style.transform = 'translateY(8px) scale(.99)';
+      paywallOverlay.classList.add('fadingOut');
+      // keep page locked until redirect
+      setTimeout(()=> {
+        window.location.href = 'app.html';
+      }, 2000); // slow fade duration (2s) as requested
+    }
+
+    // Allow Esc to close paywall
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && paywallOverlay.classList.contains('visible')) {
+        closePaywall();
+      }
+    });
+
+    // Accessibility: click outside card closes
+    paywallOverlay.addEventListener('click', (e) => {
+      if (e.target === paywallOverlay) closePaywall();
     });
   </script>
 </body>
