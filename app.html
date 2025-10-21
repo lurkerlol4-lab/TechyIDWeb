@@ -12,14 +12,14 @@
 <body>
   <!-- Intro Splash Screen -->
   <div id="splash-screen">
-    <img src="2067.png" alt="IDReaderXP Logo" class="logo-circle splash-logo">
+    <img src="logo.jpeg" alt="IDReaderXP Logo" class="splash-logo">
     <h1 class="splash-title">IDReaderXP</h1>
   </div>
 
   <!-- Main App Container -->
   <div id="main-content" class="container" style="display:none;">
     <div class="container" style="text-align:center;">
-      <img src="2067.png" alt="IDReaderXP Logo" class="logo-circle">
+      <img src="logo.jpeg" alt="IDReaderXP Logo" class="logo-circle">
     </div>
 
     <section class="card">
@@ -65,7 +65,7 @@
           main.style.display = "block";
           startCamera();
         }, 1000);
-      }, 2000); // stays for 2 seconds
+      }, 2500); // stays for 2.5 seconds
     });
 
     let stream, track, torchOn = false;
@@ -190,6 +190,20 @@
     }
     #splash-screen.fade-out { opacity: 0; pointer-events: none; }
 
+    .splash-logo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 3px solid var(--cyan);
+      animation: spinLogo 3s ease-in-out, glowPulse 3s infinite ease-in-out;
+      box-shadow: 0 0 30px rgba(95,216,255,0.3);
+    }
+
+    @keyframes spinLogo {
+      0% { transform: rotate(0deg) scale(0.7); opacity: 0; }
+      100% { transform: rotate(360deg) scale(1); opacity: 1; }
+    }
+
     .splash-title {
       font-family: "Orbitron", sans-serif;
       font-size: 28px;
@@ -204,7 +218,6 @@
       to { text-shadow: 0 0 25px var(--cyan-2); }
     }
 
-    /* Logo Styles */
     .logo-circle {
       width: 140px;
       height: 140px;
@@ -214,17 +227,6 @@
       box-shadow: 0 0 25px rgba(95,216,255,0.3);
       margin-bottom: 15px;
       animation: glowPulse 3s infinite ease-in-out;
-    }
-
-    .splash-logo {
-      width: 160px;
-      height: 160px;
-      animation: fadeInScale 2s ease forwards;
-    }
-
-    @keyframes fadeInScale {
-      0% { opacity: 0; transform: scale(0.7); }
-      100% { opacity: 1; transform: scale(1); }
     }
 
     @keyframes glowPulse {
