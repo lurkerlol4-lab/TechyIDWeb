@@ -5,238 +5,292 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Techy-ID Co. — Fast. Secure. Verified.</title>
 
-  <!-- Fonts and Icons -->
+  <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Font Awesome for stars/icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <style>
-    :root {
-      --white: #ffffff;
-      --cyan: #5fd8ff;
-      --cyan-2: #c3f0ff;
-      --dark-blue: #001217;
-      --muted: #4a4a4a;
-      --gradient-top: var(--white);
-      --gradient-mid: var(--cyan-2);
-      --gradient-bottom: var(--dark-blue);
-      --accent-glow: 0 0 20px rgba(95,216,255,0.6);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-mid), var(--gradient-bottom));
-      color: var(--dark-blue);
-      min-height: 100vh;
-      transition: background 0.8s ease;
-      overflow-x: hidden;
-    }
-
-    .container {
-      max-width: 950px;
-      margin: 0 auto;
-      padding: 40px 24px;
-    }
-
-    header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 0; gap: 12px;
-    }
-
-    nav a {
-      text-decoration: none; color: var(--dark-blue); font-weight: 600;
-      padding: 6px 10px; border-radius: 8px;
-    }
-    nav a:hover { color: var(--cyan); background: rgba(0,186,255,0.05); }
-
-    .pulse-logo {
-      width: 72px; height: 72px; border-radius: 50%; overflow: hidden;
-      display: inline-block; border: 3px solid var(--cyan);
-      box-shadow: 0 0 30px rgba(95,216,255,0.9);
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-    .pulse-logo img { width: 100%; height: 100%; object-fit: cover; }
-
-    @keyframes pulse {
-      0%,100% { transform: scale(1); box-shadow: 0 0 30px rgba(95,216,255,0.7); }
-      50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(95,216,255,1); }
-    }
-
-    .card {
-      background: rgba(255,255,255,0.9);
-      border-radius: 18px;
-      padding: 40px 30px;
-      margin: 80px 0;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      backdrop-filter: blur(8px);
-    }
-
-    h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 26px;
-      margin-bottom: 14px;
-    }
-    p { line-height: 1.6; color: var(--muted); }
-
-    .btn-primary {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg,var(--cyan),var(--cyan-2));
-      font-weight: 600;
-      cursor: pointer;
-      color: #001217;
-      box-shadow: var(--accent-glow);
-    }
-    .btn-primary:hover { transform: scale(1.05); }
-
-    footer {
-      text-align: center;
-      margin: 60px 0 30px;
-      color: #ccecff;
-      font-size: 14px;
-    }
-
-    /* FAQ Section */
-    .faq-item { margin-bottom: 18px; }
-    .faq-question { font-weight: 700; color: var(--dark-blue); }
-    .faq-answer { margin-left: 12px; color: var(--muted); }
-
-    /* Review Section */
-    #reviewSection { color: var(--white); }
-    #reviewForm input, #reviewForm textarea {
-      width: 100%; padding: 10px; margin: 6px 0;
-      border-radius: 8px; border: none;
-    }
-    #reviewForm button {
-      background: var(--cyan); border: none;
-      padding: 10px 14px; border-radius: 8px;
-      cursor: pointer; font-weight: 600;
-    }
-    #reviewForm button:hover { background: var(--cyan-2); color: #001217; }
-
-    .star-rating i {
-      font-size: 22px; color: #ccc; cursor: pointer;
-      transition: color 0.2s ease;
-    }
-    .star-rating i.active { color: gold; }
-
-    .review {
-      background: rgba(255,255,255,0.1);
-      padding: 16px; border-radius: 10px;
-      margin-top: 10px;
-    }
-    .review strong { color: var(--cyan-2); }
-
-    /* Scroll darkness effect */
-    body.scrolled {
-      background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-mid), #000814);
-      color: #e0f8ff;
-    }
-  </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div style="display:flex;align-items:center;gap:14px;">
-        <div class="pulse-logo"><img src="company.jpeg" alt="Logo"></div>
-        <div style="font-family:'Orbitron';font-weight:700;font-size:20px;">TECHY-ID CO.</div>
+  <!-- Intro / Splash -->
+  <div id="intro" class="intro">
+    <div class="intro-inner">
+      <div class="intro-logo">
+        <div class="intro-mark">ID</div>
+        <div class="intro-title">TECHY-ID CO.</div>
       </div>
-      <nav>
+      <div class="intro-sub">Fast. Secure. Verified.</div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div id="page" class="page hidden">
+    <header class="site-header">
+      <div class="brand">
+        <div class="pulse-logo" aria-hidden="true">
+          <img src="company.jpeg" alt="Techy-ID logo">
+        </div>
+        <div class="brand-text">TECHY-ID CO.</div>
+      </div>
+
+      <nav class="nav">
         <a href="#product">Product</a>
         <a href="#about-us">About Us</a>
         <a href="#faq">FAQ</a>
-        <a href="#reviewSection">Reviews</a>
+        <a href="#reviews">Reviews</a>
         <a class="btn-primary" href="#contact">Contact</a>
       </nav>
     </header>
 
-    <section id="hero" class="card">
-      <h2>Welcome to Techy-ID Co.</h2>
-      <p>We revolutionize identity verification with our flagship app, <strong>IDReaderXP</strong>, ensuring fast, secure, and reliable authentication.</p>
-    </section>
+    <main class="container">
+      <!-- Hero -->
+      <section id="hero" class="card large">
+        <h1>Welcome to Techy-ID Co.</h1>
+        <p>We revolutionize identity verification with digital solutions. Our flagship app, <strong>IDReaderXP</strong>, ensures fast, secure, and reliable authentication for individuals, businesses, and institutions.</p>
+      </section>
 
-    <section id="product" class="card">
-      <h2>Our Product</h2>
-      <p><strong>IDReaderXP</strong> is a secure app for scanning and verifying digital IDs — providing businesses and users with a trusted verification system.</p>
-      <button class="btn-primary" onclick="window.location.href='app.html'">Purchase and Open IDReaderXP</button>
-    </section>
-
-    <section id="about-us" class="card">
-      <h2>About Us</h2>
-      <p>Techy-ID Co. is a forward-thinking company from the Philippines, dedicated to redefining identity verification with secure and accessible technology. Our mission is to create trust and convenience through innovation.</p>
-    </section>
-
-    <section id="faq" class="card">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq-item">
-        <div class="faq-question">Q. How long does each subscription last?</div>
-        <div class="faq-answer">A. 7 Days, no more, no less.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Q. Where is your company located?</div>
-        <div class="faq-answer">A. Don Bosco High School, Parañaque.</div>
-      </div>
-    </section>
-
-    <section id="reviewSection" class="card">
-      <h2>Leave a Review</h2>
-      <form id="reviewForm">
-        <div class="star-rating" id="starRating">
-          <i class="fa-solid fa-star" data-value="1"></i>
-          <i class="fa-solid fa-star" data-value="2"></i>
-          <i class="fa-solid fa-star" data-value="3"></i>
-          <i class="fa-solid fa-star" data-value="4"></i>
-          <i class="fa-solid fa-star" data-value="5"></i>
+      <!-- Product -->
+      <section id="product" class="card large">
+        <h2>Our Product — IDReaderXP</h2>
+        <p><strong>IDReaderXP</strong> is a secure web-based app for scanning, verifying, and managing digital IDs — designed for organizations that need fast, reliable verification without QR codes.</p>
+        <div class="product-actions">
+          <button id="purchaseBtn" class="btn-primary">Purchase and Open IDReaderXP</button>
+          <div class="price-note">— ₱50 / week (mock subscription)</div>
         </div>
-        <input type="text" id="reviewName" placeholder="Your name" required>
-        <textarea id="reviewMessage" rows="3" placeholder="Your message..." required></textarea>
-        <button type="submit">Submit Review</button>
-      </form>
-      <div id="reviewsList"></div>
-    </section>
+      </section>
 
-    <section id="contact" class="card">
-      <h2>Contact Us</h2>
-      <p>Email us at <a href="mailto:techyidcompany@gmail.com" style="color:var(--cyan);text-decoration:none;">techyidcompany@gmail.com</a></p>
-    </section>
+      <!-- Company Description -->
+      <section id="about" class="card large">
+        <h2>Company Description</h2>
+        <p>Founded in the Philippines, Techy-ID Co. is a forward-thinking technology company dedicated to redefining identity verification in the digital age. By combining scanning technology with simple user interfaces, we provide solutions that allow schools, organizations, and enterprises to verify individuals securely, quickly, and reliably.</p>
+      </section>
 
-    <footer>© 2025 Techy-ID Co. — Fast. Secure. Verified.</footer>
+      <!-- About Us detailed -->
+      <section id="about-us" class="card large">
+        <h2>About Us</h2>
+        <p>Techy-ID Co. is more than a technology startup — it’s a mission to build trust and efficiency in digital verification systems. Our team is composed of innovative thinkers and engineers driven by the goal of making ID validation more secure and accessible for everyone.</p>
+
+        <p>At Techy-ID, we prioritize data security, user privacy, and simplicity. Our core product, <strong>IDReaderXP</strong>, serves as a modern solution that empowers institutions to authenticate individuals without requiring QR codes or manual checking — ensuring convenience without compromising security.</p>
+
+        <p>We continue to innovate through our research in AI-based scanning and real-time ID validation, aiming to become a leader in identity technology solutions across Asia. Techy-ID is proudly built in the Philippines, inspired by local ingenuity and global standards.</p>
+
+        <p><strong>Mission:</strong> To provide a secure, fast, and accessible platform for digital identity verification that benefits communities, schools, and businesses.</p>
+        <p><strong>Vision:</strong> To become the most trusted and advanced digital ID verification company in Southeast Asia by 2030.</p>
+
+        <h3>Leadership Team</h3>
+        <ul class="leadership">
+          <li><strong>CEO:</strong> Kristine Lopez</li>
+          <li><strong>CO-CEO:</strong> Cristopher Esorenia</li>
+          <li><strong>CFO:</strong> Karon Balls</li>
+          <li><strong>COO:</strong> Jeremiah Oreta</li>
+        </ul>
+
+        <div class="about-visual">
+          <img src="logo.jpeg" alt="Techy-ID logo mockup">
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="card large">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q">Q. How long does each subscription last?</div>
+            <div class="faq-a">A. 7 Days, no more, no less.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Q. Where is your company located?</div>
+            <div class="faq-a">A. Don Bosco High School, Parañaque.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section id="reviews" class="card large">
+        <h2>Reviews</h2>
+
+        <form id="reviewForm" class="review-form" onsubmit="return submitReview(event);">
+          <div class="star-rating" id="starRating" aria-label="Star rating">
+            <i class="fa-solid fa-star" data-value="1" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" data-value="2" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" data-value="3" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" data-value="4" aria-hidden="true"></i>
+            <i class="fa-solid fa-star" data-value="5" aria-hidden="true"></i>
+          </div>
+
+          <input id="reviewName" type="text" placeholder="Your name" required aria-label="Your name">
+          <textarea id="reviewMessage" rows="4" placeholder="Your message..." required aria-label="Your message"></textarea>
+          <div class="review-actions">
+            <button type="submit" class="btn-primary">Submit Review</button>
+            <button type="button" class="btn-ghost" onclick="clearReviews()">Clear Reviews (session)</button>
+          </div>
+        </form>
+
+        <div id="reviewsList" class="reviews-list" aria-live="polite"></div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="card large">
+        <h2>Contact Us</h2>
+        <p>Have questions, suggestions, or partnership proposals? Email us:</p>
+        <p><a href="mailto:techyidcompany@gmail.com" class="mailto">techyidcompany@gmail.com</a></p>
+      </section>
+
+      <footer class="site-footer">© 2025 Techy-ID Co. — Fast. Secure. Verified.</footer>
+    </main>
   </div>
 
+  <!-- Paywall overlay (dark blur + frosted card) -->
+  <div id="paywallOverlay" class="paywall-overlay" aria-hidden="true" role="dialog" aria-labelledby="payTitle">
+    <div class="paywall-card" role="document" id="paywallCard">
+      <div class="paywall-header">
+        <div class="paywall-title" id="payTitle">Purchase and Open IDReaderXP</div>
+        <div class="paywall-sub">To continue, please select your preferred payment method.</div>
+      </div>
+
+      <div class="pay-methods">
+        <button class="pay-btn" data-method="GCash" onclick="choosePayment('GCash')">📱 GCash</button>
+        <button class="pay-btn" data-method="Card" onclick="choosePayment('Card')">💳 Credit / Debit Card</button>
+        <button class="pay-btn" data-method="PayPal" onclick="choosePayment('PayPal')">💸 PayPal</button>
+      </div>
+
+      <button class="pay-cancel" onclick="closePaywall()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
   <script>
-    // Scroll darkness effect
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      if (scrollY > 200) document.body.classList.add('scrolled');
-      else document.body.classList.remove('scrolled');
+    // --- Intro splash behavior ---
+    const intro = document.getElementById('intro');
+    const page = document.getElementById('page');
+
+    window.addEventListener('load', () => {
+      // show intro for 2.2s then reveal page with strong animation
+      setTimeout(() => {
+        intro.classList.add('intro-hide');
+        setTimeout(() => {
+          intro.style.display = 'none';
+          page.classList.remove('hidden');
+          page.classList.add('show-page');
+        }, 900);
+      }, 2200);
     });
 
-    // Review system
-    const stars = document.querySelectorAll('.star-rating i');
+    // --- Scroll-driven theme darkening (progress-based) ---
+    function updateThemeOnScroll() {
+      const max = document.body.scrollHeight - window.innerHeight;
+      const pct = Math.min(1, window.scrollY / Math.max(1, max));
+      // we map 0..1 -> background darkening via CSS class (toggle heavy mode after 0.25)
+      if (pct > 0.25) document.body.classList.add('scrolled-strong');
+      else document.body.classList.remove('scrolled-strong');
+    }
+    window.addEventListener('scroll', updateThemeOnScroll);
+    updateThemeOnScroll();
+
+    // --- Paywall logic ---
+    const purchaseBtn = document.getElementById('purchaseBtn');
+    const paywallOverlay = document.getElementById('paywallOverlay');
+    const paywallCard = document.getElementById('paywallCard');
+
+    purchaseBtn.addEventListener('click', openPaywall);
+
+    function openPaywall() {
+      paywallOverlay.style.display = 'flex';
+      paywallOverlay.setAttribute('aria-hidden', 'false');
+      setTimeout(() => paywallOverlay.classList.add('visible'), 30);
+      setTimeout(() => paywallCard.classList.add('show'), 100);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePaywall() {
+      paywallCard.classList.remove('show');
+      paywallOverlay.classList.remove('visible');
+      setTimeout(() => {
+        paywallOverlay.style.display = 'none';
+        paywallOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }, 420);
+    }
+
+    function choosePayment(method) {
+      // fade out overlay slowly (2s), then redirect to app.html
+      paywallCard.classList.remove('show');
+      paywallOverlay.classList.add('fading-out');
+      setTimeout(() => {
+        // final redirect (mock) - no real payment
+        window.location.href = 'app.html';
+      }, 2000);
+    }
+
+    // close with Escape or click outside
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && paywallOverlay.classList.contains('visible')) closePaywall();
+    });
+    paywallOverlay.addEventListener('click', (e) => { if (e.target === paywallOverlay) closePaywall(); });
+
+    // --- Review system (session temporary) ---
+    const stars = document.querySelectorAll('#starRating i');
     let selectedRating = 0;
     stars.forEach(star => {
+      star.addEventListener('mouseenter', () => {
+        highlightStars(parseInt(star.dataset.value));
+      });
+      star.addEventListener('mouseleave', () => {
+        highlightStars(selectedRating);
+      });
       star.addEventListener('click', () => {
-        selectedRating = parseInt(star.getAttribute('data-value'));
-        stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating));
+        selectedRating = parseInt(star.dataset.value);
+        highlightStars(selectedRating);
       });
     });
 
-    const form = document.getElementById('reviewForm');
-    const reviewsList = document.getElementById('reviewsList');
-    form.addEventListener('submit', e => {
+    function highlightStars(count) {
+      stars.forEach(s => {
+        const val = parseInt(s.dataset.value);
+        if (val <= count) s.classList.add('active');
+        else s.classList.remove('active');
+      });
+    }
+
+    function submitReview(e) {
       e.preventDefault();
-      const name = document.getElementById('reviewName').value.trim();
-      const message = document.getElementById('reviewMessage').value.trim();
-      if (!selectedRating) { alert("Please select a rating."); return; }
+      const name = document.getElementById('reviewName').value.trim() || 'Anonymous';
+      const msg = document.getElementById('reviewMessage').value.trim() || '';
+      if (!selectedRating) {
+        alert('Please choose a star rating (1-5).');
+        return false;
+      }
+      const reviewsList = document.getElementById('reviewsList');
       const review = document.createElement('div');
-      review.classList.add('review');
-      review.innerHTML = `<strong>${name}</strong> — ${'⭐'.repeat(selectedRating)}<br>${message}`;
+      review.className = 'review';
+      review.innerHTML = `<div class="review-head"><strong>${escapeHtml(name)}</strong> <span class="stars">${'★'.repeat(selectedRating)}${'☆'.repeat(5 - selectedRating)}</span></div><div class="review-body">${escapeHtml(msg)}</div>`;
       reviewsList.prepend(review);
-      form.reset();
-      stars.forEach(s => s.classList.remove('active'));
+
+      // reset form
+      document.getElementById('reviewForm').reset();
       selectedRating = 0;
-    });
+      highlightStars(0);
+      return false;
+    }
+
+    function clearReviews() {
+      if (confirm('Clear all session reviews?')) {
+        document.getElementById('reviewsList').innerHTML = '';
+      }
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    }
+
+    // Accessibility: simple focus trap while paywall is open (basic)
+    document.addEventListener('focus', (e) => {
+      if (paywallOverlay.classList.contains('visible') && !paywallOverlay.contains(e.target)) {
+        e.stopPropagation();
+        paywallOverlay.querySelector('.pay-btn, .pay-cancel').focus();
+      }
+    }, true);
   </script>
 </body>
 </html>
