@@ -11,105 +11,8 @@
 
   <!-- Font Awesome for stars/icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <style>
-    /* === SCI-FI AUTO-GENERATED BACKGROUND === */
-    body {
-      background: radial-gradient(circle at 20% 20%, #0b1423, #01060f 60%, #000 100%);
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Glowing grid animation layer */
-    .sci-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(90deg, rgba(95,216,255,0.05) 1px, transparent 1px),
-        linear-gradient(rgba(95,216,255,0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
-      z-index: 0;
-      animation: gridMove 30s linear infinite;
-      pointer-events: none;
-      opacity: 0.25;
-    }
-
-    /* Neon swirl layer */
-    .sci-swirl {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: conic-gradient(
-        from 90deg,
-        rgba(0,255,255,0.1),
-        transparent 20%,
-        rgba(0,150,255,0.12),
-        transparent 60%
-      );
-      filter: blur(60px);
-      mix-blend-mode: screen;
-      animation: swirlPulse 12s ease-in-out infinite alternate;
-      opacity: 0.35;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    @keyframes gridMove {
-      from { background-position: 0 0, 0 0; }
-      to { background-position: 200px 200px, 200px 200px; }
-    }
-
-    @keyframes swirlPulse {
-      0% { transform: rotate(0deg) scale(1); opacity: 0.3; }
-      50% { transform: rotate(180deg) scale(1.1); opacity: 0.45; }
-      100% { transform: rotate(360deg) scale(1); opacity: 0.35; }
-    }
-
-    /* Page container on top of bg */
-    #page, #intro, footer, .card {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Glow enhancement */
-    .card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(95,216,255,0.1);
-      box-shadow: 0 0 25px rgba(95,216,255,0.08);
-      backdrop-filter: blur(12px);
-    }
-
-    .site-header, footer {
-      background: rgba(0,0,0,0.35);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(95,216,255,0.2);
-    }
-
-    .btn-primary {
-      box-shadow: 0 0 18px rgba(95,216,255,0.4);
-    }
-
-    /* Pulsing effect for logo */
-    .pulse-logo img {
-      animation: pulseGlow 2.8s ease-in-out infinite;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 6px #3EC6FF); }
-      50% { filter: drop-shadow(0 0 20px #5FD8FF); }
-    }
-  </style>
 </head>
 <body>
-  <!-- Animated sci-fi background layers -->
-  <div class="sci-bg"></div>
-  <div class="sci-swirl"></div>
-
   <!-- Intro / Splash -->
   <div id="intro" class="intro">
     <div class="intro-inner">
@@ -125,9 +28,7 @@
   <div id="page" class="page hidden">
     <header class="site-header">
       <div class="brand">
-        <div class="pulse-logo" aria-hidden="true">
-          <img src="company.jpeg" alt="Techy-ID logo">
-        </div>
+        <img src="company.jpeg" alt="Techy-ID logo">
         <div class="brand-text">TECHY-ID CO.</div>
       </div>
 
@@ -140,13 +41,165 @@
       </nav>
     </header>
 
-    <!-- KEEP ALL YOUR EXISTING SECTIONS HERE -->
-    <!-- (Use your previously working version from your message) -->
+    <main class="container">
+      <!-- Hero -->
+      <section id="hero" class="card large">
+        <h1>Welcome to Techy-ID Co.</h1>
+        <p>We revolutionize identity verification with digital solutions. Our flagship app, <strong>IDReaderXP</strong>, ensures fast, secure, and reliable authentication for individuals, businesses, and institutions.</p>
+      </section>
 
-    <!-- Paywall + Review scripts remain unchanged -->
-    <script>
-      // All your previous JS from website.html goes here (unchanged)
-    </script>
+      <!-- Product -->
+      <section id="product" class="card large">
+        <h2>Our Product — IDReaderXP</h2>
+        <p><strong>IDReaderXP</strong> is a secure web-based app for scanning, verifying, and managing digital IDs — designed for organizations that need fast, reliable verification without QR codes.</p>
+        <div class="product-actions">
+          <button id="purchaseBtn" class="btn-primary">Purchase and Open IDReaderXP</button>
+          <div class="price-note">— ₱50 / week (mock subscription)</div>
+        </div>
+      </section>
+
+      <!-- About Us -->
+      <section id="about-us" class="card large">
+        <h2>About Us</h2>
+        <p>Techy-ID Co. is a forward-thinking tech company dedicated to redefining digital verification. Our mission is to make identity checks secure, fast, and accessible for schools and organizations using <strong>IDReaderXP</strong>.</p>
+
+        <h3>Leadership Team</h3>
+        <ul class="leadership">
+          <li><strong>CEO:</strong> Kristine Lopez</li>
+          <li><strong>CO-CEO:</strong> Cristopher Esorenia</li>
+          <li><strong>CFO:</strong> Karon Balls</li>
+          <li><strong>COO:</strong> Jeremiah Oreta</li>
+        </ul>
+
+        <div class="about-visual">
+          <img src="logo.jpeg" alt="Techy-ID logo mockup">
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="card large">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q">Q. How long does each subscription last?</div>
+            <div class="faq-a">A. 7 Days, no more, no less.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Q. Where is your company located?</div>
+            <div class="faq-a">A. Don Bosco High School, Parañaque.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section id="reviews" class="card large">
+        <h2>Reviews</h2>
+
+        <form id="reviewForm" class="review-form" onsubmit="return submitReview(event);">
+          <div class="star-rating" id="starRating">
+            <i class="fa-solid fa-star" data-value="1"></i>
+            <i class="fa-solid fa-star" data-value="2"></i>
+            <i class="fa-solid fa-star" data-value="3"></i>
+            <i class="fa-solid fa-star" data-value="4"></i>
+            <i class="fa-solid fa-star" data-value="5"></i>
+          </div>
+
+          <input id="reviewName" type="text" placeholder="Your name" required>
+          <textarea id="reviewMessage" rows="4" placeholder="Your message..." required></textarea>
+          <div class="review-actions">
+            <button type="submit" class="btn-primary">Submit Review</button>
+            <button type="button" class="btn-ghost" onclick="clearReviews()">Clear Reviews</button>
+          </div>
+        </form>
+
+        <div id="reviewsList" class="reviews-list"></div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="card large">
+        <h2>Contact Us</h2>
+        <p>Have questions, suggestions, or partnership proposals? Email us at:</p>
+        <p><a href="mailto:techyidcompany@gmail.com">techyidcompany@gmail.com</a></p>
+      </section>
+
+      <footer class="site-footer">© 2025 Techy-ID Co. — Fast. Secure. Verified.</footer>
+    </main>
   </div>
+
+  <!-- Paywall -->
+  <div id="paywallOverlay" class="paywall-overlay">
+    <div class="paywall-card" id="paywallCard">
+      <div class="paywall-title">Purchase and Open IDReaderXP</div>
+      <div class="paywall-sub">Please choose your payment method:</div>
+      <div class="pay-methods">
+        <button class="pay-btn" onclick="choosePayment('GCash')">📱 GCash</button>
+        <button class="pay-btn" onclick="choosePayment('Card')">💳 Card</button>
+        <button class="pay-btn" onclick="choosePayment('PayPal')">💸 PayPal</button>
+      </div>
+      <button class="pay-cancel" onclick="closePaywall()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Intro fade-in animation
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('intro').classList.add('intro-hide');
+        setTimeout(() => {
+          document.getElementById('intro').style.display = 'none';
+          document.getElementById('page').classList.remove('hidden');
+          document.getElementById('page').classList.add('show-page');
+        }, 800);
+      }, 1800);
+    });
+
+    // Paywall
+    const overlay = document.getElementById('paywallOverlay');
+    const card = document.getElementById('paywallCard');
+
+    function choosePayment(method) {
+      overlay.style.opacity = 0;
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        window.location.href = 'app.html';
+      }, 1500);
+    }
+    function closePaywall() {
+      overlay.style.display = 'none';
+    }
+
+    // Reviews
+    const stars = document.querySelectorAll('#starRating i');
+    let selectedRating = 0;
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.dataset.value);
+        highlightStars(selectedRating);
+      });
+    });
+    function highlightStars(count) {
+      stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.value) <= count));
+    }
+    function submitReview(e) {
+      e.preventDefault();
+      const name = document.getElementById('reviewName').value.trim() || "Anonymous";
+      const msg = document.getElementById('reviewMessage').value.trim();
+      if (!selectedRating || !msg) return alert("Please select a rating and write a message.");
+
+      const list = document.getElementById('reviewsList');
+      const item = document.createElement('div');
+      item.className = 'review';
+      item.innerHTML = `<div class="review-head"><strong>${name}</strong> <span>${'★'.repeat(selectedRating)}</span></div><div>${msg}</div>`;
+      list.prepend(item);
+
+      document.getElementById('reviewForm').reset();
+      selectedRating = 0;
+      highlightStars(0);
+    }
+    function clearReviews() {
+      document.getElementById('reviewsList').innerHTML = '';
+    }
+  </script>
 </body>
 </html>
