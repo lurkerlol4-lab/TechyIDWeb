@@ -5,323 +5,237 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Techy-ID Co. — Fast. Secure. Verified.</title>
 
-  <!-- Fonts -->
+  <!-- Fonts and Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     :root {
       --white: #ffffff;
       --cyan: #5fd8ff;
       --cyan-2: #c3f0ff;
-      --blue-light: #e9faff;
-      --blue-mid: #b9ecff;
+      --dark-blue: #001217;
       --muted: #4a4a4a;
-      --text-dark: #001217;
+      --gradient-top: var(--white);
+      --gradient-mid: var(--cyan-2);
+      --gradient-bottom: var(--dark-blue);
       --accent-glow: 0 0 20px rgba(95,216,255,0.6);
-      --modal-bg: rgba(0,0,0,0.6);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: var(--white);
-      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-mid), var(--gradient-bottom));
+      color: var(--dark-blue);
       min-height: 100vh;
+      transition: background 0.8s ease;
       overflow-x: hidden;
     }
 
-    /* Animated cubism background */
-    body::before, body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
+    .container {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 40px 24px;
     }
-    body::before {
-      background: linear-gradient(135deg, var(--blue-light), var(--white) 40%, var(--blue-mid));
-      clip-path: polygon(0% 0%, 25% 5%, 50% 0%, 75% 8%, 100% 0%, 100% 100%, 75% 95%, 50% 100%, 25% 92%, 0% 100%);
-      opacity: 0.7;
-      animation: waveA 12s ease-in-out infinite alternate;
-    }
-    body::after {
-      background: linear-gradient(135deg, var(--cyan-2), var(--white), var(--cyan));
-      clip-path: polygon(0% 10%, 25% 0%, 50% 8%, 75% 0%, 100% 12%, 100% 100%, 75% 92%, 50% 100%, 25% 95%, 0% 100%);
-      opacity: 0.6;
-      mix-blend-mode: lighten;
-      animation: waveB 15s ease-in-out infinite alternate;
-    }
-    @keyframes waveA { 0%{transform:translateY(0)}100%{transform:translateY(-18px)} }
-    @keyframes waveB { 0%{transform:translateY(0) scale(1)}100%{transform:translateY(-20px) scale(1.03)} }
 
-    /* Layout */
-    .container { max-width: 950px; margin: 0 auto; padding: 24px; position: relative; z-index: 1; }
-    header { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; gap: 12px; }
-    nav { display:flex; gap:18px; align-items:center; }
-    nav a { text-decoration:none; color:var(--text-dark); font-weight:600; padding:6px 8px; border-radius:8px; }
-    nav a:hover { color:var(--cyan); background: rgba(0,186,255,0.03); }
+    header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0; gap: 12px;
+    }
 
-    .logo-mark { width:84px; height:42px; border-radius:10px; display:flex; align-items:center; justify-content:center;
-      background: linear-gradient(135deg,var(--cyan),var(--cyan-2)); color:#001217; font-family:'Orbitron'; font-weight:700;
+    nav a {
+      text-decoration: none; color: var(--dark-blue); font-weight: 600;
+      padding: 6px 10px; border-radius: 8px;
+    }
+    nav a:hover { color: var(--cyan); background: rgba(0,186,255,0.05); }
+
+    .pulse-logo {
+      width: 72px; height: 72px; border-radius: 50%; overflow: hidden;
+      display: inline-block; border: 3px solid var(--cyan);
+      box-shadow: 0 0 30px rgba(95,216,255,0.9);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    .pulse-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); box-shadow: 0 0 30px rgba(95,216,255,0.7); }
+      50% { transform: scale(1.05); box-shadow: 0 0 60px rgba(95,216,255,1); }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      border-radius: 18px;
+      padding: 40px 30px;
+      margin: 80px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+    p { line-height: 1.6; color: var(--muted); }
+
+    .btn-primary {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg,var(--cyan),var(--cyan-2));
+      font-weight: 600;
+      cursor: pointer;
+      color: #001217;
       box-shadow: var(--accent-glow);
     }
+    .btn-primary:hover { transform: scale(1.05); }
 
-    .card { background: rgba(255,255,255,0.9); border-radius: 18px; padding: 26px; margin: 26px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); backdrop-filter: blur(10px); }
-    h2 { font-family:'Orbitron'; color:var(--text-dark); margin-bottom:10px; }
-    p { color:var(--muted); line-height:1.5; }
-
-    .btn { padding:10px 16px; border-radius:10px; cursor:pointer; font-weight:600; border:none; }
-    .btn-primary { background: linear-gradient(135deg,var(--cyan),var(--cyan-2)); color:#001217; box-shadow: var(--accent-glow); }
-    .btn-ghost { background: transparent; color: var(--muted); border-radius:8px; padding:8px 12px; }
-
-    /* Strong pulse circle logo in header */
-    .pulse-logo {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      overflow: hidden;
-      display: inline-block;
-      border: 3px solid var(--cyan);
-      box-shadow: 0 0 30px rgba(95,216,255,0.9);
-      animation: strongPulse 2.5s ease-in-out infinite;
-      background-size: cover;
-      background-position: center;
-    }
-    .pulse-logo img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-    @keyframes strongPulse {
-      0% { transform: scale(1); box-shadow: 0 0 20px rgba(95,216,255,0.6), 0 0 40px rgba(95,216,255,0.4); }
-      50% { transform: scale(1.06); box-shadow: 0 0 50px rgba(95,216,255,1), 0 0 90px rgba(95,216,255,0.7); }
-      100% { transform: scale(1); box-shadow: 0 0 20px rgba(95,216,255,0.6), 0 0 40px rgba(95,216,255,0.4); }
-    }
-
-    /* Paywall overlay (dark + blur) */
-    #paywallOverlay {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 3000;
-      background: var(--modal-bg);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-    #paywallOverlay.visible { display:flex; opacity:1; }
-
-    /* Paywall card */
-    .paywall-card {
-      width: 92%;
-      max-width: 480px;
-      border-radius: 16px;
-      padding: 20px 22px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,255,255,0.9));
-      box-shadow: 0 10px 40px rgba(0,0,0,0.35), 0 0 60px rgba(95,216,255,0.12);
+    footer {
       text-align: center;
-      transform: translateY(10px);
-      transition: transform 0.45s cubic-bezier(.2,.9,.2,1), opacity 0.45s;
-      font-family: Inter, sans-serif;
-    }
-    .paywall-card.show { transform: translateY(0); opacity:1; }
-
-    .paywall-title { font-family: 'Orbitron'; font-size:20px; color:var(--text-dark); margin-bottom:8px; }
-    .paywall-sub { color:var(--muted); margin-bottom:18px; }
-
-    .pay-methods { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:12px; }
-    .pay-btn {
-      padding:12px 18px; border-radius:12px; cursor:pointer; border:2px solid rgba(0,0,0,0.06);
-      min-width:120px; font-weight:700; background:linear-gradient(90deg,var(--cyan-2),var(--cyan));
-      color:#001217; box-shadow: 0 6px 22px rgba(95,216,255,0.14);
-      position:relative; overflow:hidden;
+      margin: 60px 0 30px;
+      color: #ccecff;
+      font-size: 14px;
     }
 
-    .pay-btn:hover { transform: translateY(-4px); box-shadow: 0 8px 34px rgba(95,216,255,0.25); }
-    .pay-btn:active { transform: translateY(-2px); }
+    /* FAQ Section */
+    .faq-item { margin-bottom: 18px; }
+    .faq-question { font-weight: 700; color: var(--dark-blue); }
+    .faq-answer { margin-left: 12px; color: var(--muted); }
 
-    /* shimmer animation on buttons */
-    .pay-btn::after {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -40%;
-      width: 40%;
-      height: 200%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.06), rgba(255,255,255,0.25), rgba(255,255,255,0.06));
-      transform: rotate(25deg);
-      transition: transform 0.9s ease;
-      opacity: 0.0;
+    /* Review Section */
+    #reviewSection { color: var(--white); }
+    #reviewForm input, #reviewForm textarea {
+      width: 100%; padding: 10px; margin: 6px 0;
+      border-radius: 8px; border: none;
     }
-    .pay-btn:hover::after { transform: translateX(260%) rotate(25deg); opacity: 1; }
+    #reviewForm button {
+      background: var(--cyan); border: none;
+      padding: 10px 14px; border-radius: 8px;
+      cursor: pointer; font-weight: 600;
+    }
+    #reviewForm button:hover { background: var(--cyan-2); color: #001217; }
 
-    .pay-cancel { margin-top:10px; background:transparent; color:var(--muted); border-radius:10px; padding:8px 12px; border:none; cursor:pointer; }
+    .star-rating i {
+      font-size: 22px; color: #ccc; cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .star-rating i.active { color: gold; }
 
-    /* fade-out class for overlay when redirecting (slow 2s) */
-    #paywallOverlay.fadingOut { opacity: 0; transition: opacity 2s ease; }
+    .review {
+      background: rgba(255,255,255,0.1);
+      padding: 16px; border-radius: 10px;
+      margin-top: 10px;
+    }
+    .review strong { color: var(--cyan-2); }
 
-    @media (max-width:640px) {
-      .pay-btn { min-width:100px; padding:10px 12px; }
-      .pulse-logo { width:62px; height:62px; }
+    /* Scroll darkness effect */
+    body.scrolled {
+      background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-mid), #000814);
+      color: #e0f8ff;
     }
   </style>
 </head>
 <body>
-  <!-- Intro -->
-  <div class="intro" id="intro">
-    <div class="intro-logo">
-      <div class="intro-mark">ID</div>
-      TECHY-ID CO.
-    </div>
-    <div style="margin-top:12px;color:var(--muted)">Fast. Secure. Verified.</div>
-  </div>
-
   <div class="container">
-    <!-- Header with pulse logo -->
     <header>
       <div style="display:flex;align-items:center;gap:14px;">
-        <div class="pulse-logo" aria-hidden="true">
-          <img src="company.jpeg" alt="Techy-ID Logo">
-        </div>
-        <div class="logo-text" style="font-family:'Orbitron';font-weight:700;font-size:20px;color:#001217;">TECHY-ID CO.</div>
+        <div class="pulse-logo"><img src="company.jpeg" alt="Logo"></div>
+        <div style="font-family:'Orbitron';font-weight:700;font-size:20px;">TECHY-ID CO.</div>
       </div>
-
       <nav>
-        <a class="btn btn-ghost" href="#about">About</a>
-        <a class="btn btn-ghost" href="#product">Product</a>
-        <a class="btn btn-ghost" href="#about-us">About Us</a>
-        <a class="btn btn-primary" href="#contact">Contact</a>
+        <a href="#product">Product</a>
+        <a href="#about-us">About Us</a>
+        <a href="#faq">FAQ</a>
+        <a href="#reviewSection">Reviews</a>
+        <a class="btn-primary" href="#contact">Contact</a>
       </nav>
     </header>
 
-    <!-- Hero -->
     <section id="hero" class="card">
       <h2>Welcome to Techy-ID Co.</h2>
-      <p>We revolutionize identity verification with digital solutions. Our flagship mobile app, <strong>IDReaderXP</strong>, ensures fast, secure, and reliable authentication for individuals, businesses, and institutions.</p>
+      <p>We revolutionize identity verification with our flagship app, <strong>IDReaderXP</strong>, ensuring fast, secure, and reliable authentication.</p>
     </section>
 
-    <!-- Product -->
     <section id="product" class="card">
       <h2>Our Product</h2>
-      <p><strong>IDReaderXP</strong> is a secure mobile application designed for scanning, verifying, and managing digital IDs — providing businesses and users with a trustworthy verification system.</p>
+      <p><strong>IDReaderXP</strong> is a secure app for scanning and verifying digital IDs — providing businesses and users with a trusted verification system.</p>
+      <button class="btn-primary" onclick="window.location.href='app.html'">Purchase and Open IDReaderXP</button>
+    </section>
 
-      <!-- Purchase trigger -->
-      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
-        <button class="btn btn-primary" id="purchaseBtn">Purchase and Open IDReaderXP</button>
-        <span style="color:var(--muted);">— ₱50 / week (mock subscription)</span>
+    <section id="about-us" class="card">
+      <h2>About Us</h2>
+      <p>Techy-ID Co. is a forward-thinking company from the Philippines, dedicated to redefining identity verification with secure and accessible technology. Our mission is to create trust and convenience through innovation.</p>
+    </section>
+
+    <section id="faq" class="card">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-question">Q. How long does each subscription last?</div>
+        <div class="faq-answer">A. 7 Days, no more, no less.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Q. Where is your company located?</div>
+        <div class="faq-answer">A. Don Bosco High School, Parañaque.</div>
       </div>
     </section>
 
-    <!-- Company Description -->
-    <section id="about" class="card">
-      <h2>Company Description</h2>
-      <p>Founded in the Philippines, Techy-ID Co. is a forward-thinking technology company dedicated to redefining identity verification in the digital age. By combining scanning technology with simple user interfaces, we provide solutions that allow schools, organizations, and enterprises to verify individuals securely, quickly, and reliably.</p>
+    <section id="reviewSection" class="card">
+      <h2>Leave a Review</h2>
+      <form id="reviewForm">
+        <div class="star-rating" id="starRating">
+          <i class="fa-solid fa-star" data-value="1"></i>
+          <i class="fa-solid fa-star" data-value="2"></i>
+          <i class="fa-solid fa-star" data-value="3"></i>
+          <i class="fa-solid fa-star" data-value="4"></i>
+          <i class="fa-solid fa-star" data-value="5"></i>
+        </div>
+        <input type="text" id="reviewName" placeholder="Your name" required>
+        <textarea id="reviewMessage" rows="3" placeholder="Your message..." required></textarea>
+        <button type="submit">Submit Review</button>
+      </form>
+      <div id="reviewsList"></div>
     </section>
 
-    <!-- About Us -->
-    <section id="about-us" class="card">
-      <h2>About Us</h2>
-      <p>Techy-ID Co. is more than a technology startup — it’s a mission to build trust and efficiency in digital verification systems. Our team is composed of innovative thinkers and engineers driven by the goal of making ID validation more secure and accessible for everyone.</p>
-      <p>At Techy-ID, we prioritize data security, user privacy, and simplicity. Our core product, <strong>IDReaderXP</strong>, serves as a modern solution that empowers institutions to authenticate individuals without requiring QR codes or manual checking — ensuring convenience without compromising security.</p>
-      <p>We continue to innovate through our research in AI-based scanning and real-time ID validation, aiming to become a leader in identity technology solutions across Asia. Techy-ID is proudly built in the Philippines, inspired by local ingenuity and global standards.</p>
-      <p><strong>Mission:</strong> To provide a secure, fast, and accessible platform for digital identity verification that benefits communities, schools, and businesses.</p>
-      <p><strong>Vision:</strong> To become the most trusted and advanced digital ID verification company in Southeast Asia by 2030.</p>
-      <br>
-      <h3>Leadership Team</h3>
-      <ul>
-        <li><strong>CEO:</strong> Jeremiah Oreta</li>
-        <li><strong>CO-CEO:</strong> Kristine Lopez</li>
-        <li><strong>CFO:</strong> Kairon Balla</li>
-        <li><strong>COO:</strong> Cristopher Esorenia</li>
-      </ul>
-    </section>
-
-    <!-- Contact -->
     <section id="contact" class="card">
       <h2>Contact Us</h2>
-      <p>Have questions, suggestions, or partnership proposals? We’d love to hear from you! You can reach our team directly through email.</p>
-      <p><strong>Email us at:</strong> <a href="mailto:techyidcompany@gmail.com" style="color:var(--cyan);text-decoration:none;font-weight:600;">techyidcompany@gmail.com</a></p>
-      <p style="margin-top:8px;">Please include your name, organization (if applicable), and message. We’ll respond as soon as possible.</p>
+      <p>Email us at <a href="mailto:techyidcompany@gmail.com" style="color:var(--cyan);text-decoration:none;">techyidcompany@gmail.com</a></p>
     </section>
 
     <footer>© 2025 Techy-ID Co. — Fast. Secure. Verified.</footer>
   </div>
 
-  <!-- Paywall overlay (dark blur + frosted card) -->
-  <div id="paywallOverlay" role="dialog" aria-hidden="true" aria-labelledby="payTitle" aria-modal="true">
-    <div class="paywall-card" id="paywallCard" role="document">
-      <div class="paywall-title" id="payTitle">Purchase and Open IDReaderXP</div>
-      <div class="paywall-sub">To continue, please select your preferred payment method.</div>
-
-      <div class="pay-methods" role="list">
-        <button class="pay-btn" data-method="GCash" onclick="choosePayment('GCash')">📱 GCash</button>
-        <button class="pay-btn" data-method="Card" onclick="choosePayment('Card')">💳 Credit / Debit Card</button>
-        <button class="pay-btn" data-method="PayPal" onclick="choosePayment('PayPal')">💸 PayPal</button>
-      </div>
-
-      <button class="pay-cancel" onclick="closePaywall()">Cancel</button>
-    </div>
-  </div>
-
   <script>
-    // intro fade
-    window.addEventListener("load", () => {
-      const intro = document.getElementById('intro');
-      if (intro) {
-        setTimeout(()=> {
-          intro.style.opacity = '0';
-          intro.style.visibility = 'hidden';
-        }, 2000);
-      }
+    // Scroll darkness effect
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 200) document.body.classList.add('scrolled');
+      else document.body.classList.remove('scrolled');
     });
 
-    // Paywall controls
-    const purchaseBtn = document.getElementById('purchaseBtn');
-    const paywallOverlay = document.getElementById('paywallOverlay');
-    const paywallCard = document.getElementById('paywallCard');
-
-    purchaseBtn.addEventListener('click', openPaywall);
-
-    function openPaywall() {
-      // show overlay
-      paywallOverlay.classList.add('visible');
-      paywallOverlay.setAttribute('aria-hidden', 'false');
-      // small entrance
-      setTimeout(()=> paywallCard.classList.add('show'), 30);
-      // trap focus for accessibility (simple)
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closePaywall() {
-      // hide with smooth slide-out then fully hide
-      paywallCard.classList.remove('show');
-      paywallOverlay.classList.remove('visible');
-      paywallOverlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    function choosePayment(method) {
-      // Optionally show quick feedback (could be expanded)
-      // Fade out overlay slowly (2s) then redirect
-      paywallCard.style.transform = 'translateY(8px) scale(.99)';
-      paywallOverlay.classList.add('fadingOut');
-      // keep page locked until redirect
-      setTimeout(()=> {
-        window.location.href = 'app.html';
-      }, 2000); // slow fade duration (2s) as requested
-    }
-
-    // Allow Esc to close paywall
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && paywallOverlay.classList.contains('visible')) {
-        closePaywall();
-      }
+    // Review system
+    const stars = document.querySelectorAll('.star-rating i');
+    let selectedRating = 0;
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.getAttribute('data-value'));
+        stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating));
+      });
     });
 
-    // Accessibility: click outside card closes
-    paywallOverlay.addEventListener('click', (e) => {
-      if (e.target === paywallOverlay) closePaywall();
+    const form = document.getElementById('reviewForm');
+    const reviewsList = document.getElementById('reviewsList');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('reviewName').value.trim();
+      const message = document.getElementById('reviewMessage').value.trim();
+      if (!selectedRating) { alert("Please select a rating."); return; }
+      const review = document.createElement('div');
+      review.classList.add('review');
+      review.innerHTML = `<strong>${name}</strong> — ${'⭐'.repeat(selectedRating)}<br>${message}`;
+      reviewsList.prepend(review);
+      form.reset();
+      stars.forEach(s => s.classList.remove('active'));
+      selectedRating = 0;
     });
   </script>
 </body>
